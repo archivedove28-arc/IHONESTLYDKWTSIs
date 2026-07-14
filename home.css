@@ -1,0 +1,560 @@
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap'); 
+@font-face {
+font-family: starborn;
+src: url(https://dl.dropbox.com/s/l0541on0m5eqvdj/Starborn.ttf);
+}
+
+:root {
+   --background:radial-gradient(circle,rgba(255, 171, 217, 1) 0%, rgb(236, 219, 253) 41%);
+   --content-background-color: rgb(245, 210, 245);
+   --sidebar-background-color: rgb(245, 210, 245);
+   --text-color: #000000;
+   --sidebar-text-color: #000000;
+   --link-color: #f700ff;
+   --link-color-hover: #00568f;
+   --font: 'Mountains of Christmas';
+   --heading-font: 'starborn';
+   --font-size: 20px;
+   --margin: 10px;
+   --padding: 30px;
+   --border: 6px solid #b6cdff;
+   --round-borders: 50px;
+   --sidebar-width: 250px;
+   --content-width: 100px;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+body{
+  font-family: "Sour Gummy", sans-serif;
+  background-image: radial-gradient(circle,rgba(255, 110, 192, 1) 0%, rgba(255, 184, 184, 1) 100%);;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: var(--font-size);
+  margin: 0;
+  padding: var(--margin);
+  color: var(--text-color);
+  font-family: var(--font);
+  line-height: 1;
+}
+
+
+
+::selection{
+   background: rgb(241, 52, 181);
+}
+
+a{
+   text-decoration: wavy;
+}
+
+a,
+a:visited {
+   color: var(--link-color);
+   text-decoration: wavy;
+}
+
+a:hover,
+a:focus {
+   color: var(--link-color-hover);
+   text-decoration: wavy;
+}
+
+.layout {
+   width: 1080px;
+   display: grid;
+   grid-gap: var(--margin);
+   position: relative;
+   top: 2.5rem;
+   left: -12rem;
+   grid-template: "header header header" auto "leftSidebar main rightSidebar" auto "footer footer footer" auto / var(--sidebar-width) auto var(--sidebar-width); 
+}
+
+main {
+   grid-area: main;
+   overflow-y: auto;
+   padding: var(--margin);
+   background: var(--background);
+   border: var(--border);
+   border-radius: var(--round-borders);
+}
+
+header {
+   height: 150px;
+   grid-area: header;
+   border: var(--border);
+   border-radius: var(--round-borders);
+   background: var(--content-background-color);
+}
+
+.header-content {
+  top: 4rem;
+   padding: var(--padding);
+   font-size: 35px;
+}
+
+.header-title {
+   font-weight: bold;
+   font-size: 40px;
+   font-family: var(--heading-font);
+}
+
+nav.more{
+   padding: 30px;
+   margin-left: 10em;
+}
+aside {
+   grid-area: aside;
+   border: var(--border);
+   border-radius: var(--round-borders);
+   overflow: hidden;
+   background: var(--sidebar-background-color);
+   padding: var(--padding);
+   color: var(--sidebar-text-color);
+}
+
+.left-sidebar {
+   grid-area: leftSidebar;
+   text-decoration: none;
+}
+
+.right-sidebar {
+   grid-area: rightSidebar;
+}
+
+.right-sidebar li{
+  text-decoration: dashed;
+  list-style-type: none;
+}
+
+.left-sidebar li{
+  text-decoration: none;
+  list-style-type: none;
+}
+.sidebar-title {
+   font-weight: bold;
+   font-size: 1.2em;
+   font-family: var(--heading-font);
+}
+
+
+.sidebar-section:not(:last-child) {
+  margin-bottom: 3em;
+}
+
+.sidebar-section ul,
+.sidebar-section ol {
+  padding-left: 1.5em;
+}
+
+.sidebar-section > *:not(p):not(ul):not(ol):not(blockquote) {
+  margin-top: 10px;
+}
+
+.sidebar-section blockquote {
+  background: var(--sidebar-background-color);
+  padding: 15px;
+  margin: 1em 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sidebar-section blockquote > *:first-child {
+  margin-top: 0;
+}
+
+.sidebar-section blockquote > *:last-child {
+  margin-bottom: 0;
+}
+
+nav {
+  margin-bottom: 3em;
+}
+
+nav .sidebar-title {
+  margin-bottom: 0.5em;
+}
+
+nav ul {
+  margin: 0 -5px;
+  padding: 0;
+  list-style: none;
+  user-select: none;
+}
+
+nav ul li {
+  margin-bottom: 0;
+}
+
+nav > ul li > a,
+nav > ul li > strong {
+  display: inline-block;
+}
+
+nav > ul li > a,
+nav > ul li > details summary,
+nav > ul li > strong {
+  padding: 5px 10px;
+}
+
+nav > ul li > a.active,
+nav > ul li > details.active summary {
+  font-weight: bold;
+}
+
+nav ul summary {
+  cursor: pointer;
+}
+
+nav ul ul li > a {
+  padding-left: 30px;
+}
+
+header nav {
+  margin-bottom: 0;
+}
+
+header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+header nav ul li {
+  position: relative;
+}
+
+header nav ul li:first-child > a {
+  padding-left: 0;
+}
+
+header nav ul li:last-child > a {
+  padding-right: 0;
+}
+
+header nav ul ul {
+  background: var(--content-background-color);
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  padding: 0.5em;
+  z-index: 1;
+  border: var(--border);
+  min-width: 100%;
+  box-shadow: 0px 1px 5px rgba(255, 154, 221, 0.2);
+}
+
+header nav ul li:hover ul,
+header nav ul li:focus-within ul {
+  display: block;
+}
+
+header nav ul li strong {
+  color: var(--link-color);
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+header nav ul ul li a {
+  display: block;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+main {
+  line-height: 1.5;
+}
+
+main a,
+main a:visited {
+  color: var(--link-color);
+}
+
+main a:hover,
+main a:focus {
+  color: var(--link-color-hover);
+  text-decoration-style: wavy;
+}
+
+main p,
+main .image,
+main .full-width-image,
+main .two-columns {
+  margin: 0.75em 0;
+}
+
+main ol,
+main ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+main ol li,
+main ul li {
+  margin-bottom: 0.2em;
+  line-height: 1.3;
+}
+
+main ol {
+  padding-left: 2em;
+}
+
+main blockquote {
+  background: rgba(255, 113, 231, 0.521);
+  padding: 15px;
+  margin: 1em 0;
+  border-radius: 10px;
+}
+
+main pre {
+  margin: 1em 0 1.5em;
+}
+
+main code {
+  text-transform: none;
+}
+
+main center {
+  margin: 1em 0;
+  padding: 0 1em;
+}
+
+main hr {
+  border: 0;
+  border-top: var(--border);
+  margin: 1.5em 0;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  font-family: var(--heading-font);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+main h1:first-child,
+main h2:first-child,
+main h3:first-child,
+main h4:first-child,
+main h5:first-child,
+main h6:first-child {
+  margin-top: 0;
+}
+
+main h1 {
+  font-size: 1.5em;
+}
+
+main h2 {
+  font-size: 1.4em;
+}
+
+main h3 {
+  font-size: 1.3em;
+}
+
+main h4 {
+  font-size: 1.2em;
+}
+
+main h5 {
+  font-size: 1.1em;
+}
+
+main h6 {
+  font-size: 1em;
+}
+
+
+.two-columns {
+  display: flex;
+}
+
+.two-columns > * {
+  flex: 1 1 0;
+  margin: 0;
+}
+
+.two-columns > *:first-child {
+  padding-right: 0.75em;
+}
+
+.two-columns > *:last-child {
+  padding-left: 0.75em;
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+.full-width-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.images {
+  display: flex;
+  width: calc(100% + 5px + 5px);
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.images img {
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  margin: 0;
+  overflow: hidden;
+}
+
+#skip-to-content-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  line-height: 1;
+  font-size: 1.25rem;
+  background-color: var(--content-background-color);
+  color: var(--text-color);
+  transform: translateY(-3rem);
+  transition: transform 0.1s ease-in;
+  z-index: 99999999999;
+}
+
+#skip-to-content-link:focus,
+#skip-to-content-link:focus-within {
+  transform: translateY(0);
+}
+
+/*contact me page*/
+
+.contact-info-upper-container {
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    top: 80px;
+}
+.contact-left {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+.contact-left-title h2 {
+    font-weight: 600;
+    color: rgb(255, 161, 228);
+    font-size: 40px;
+    margin-bottom: 4px;
+}
+
+.contact-left-title hr {
+    border: none;
+    width: 140px;
+    height: 20px;
+    background-color: #fda5dd;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.contact-inputs {
+  font-family: var(--font);
+    width: 400px;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-weight: 500;
+    color: #ff37a1;
+    border-radius: 50px;
+}
+
+.contact-left textarea {
+    height: 140px;
+    padding-top: 15px;
+    border-radius: none;    
+}
+
+.contact-inputs:focus {
+    border: solid 2px #a5cafd;
+}
+
+.contact-inputs::placeholder {
+    color: black;
+}
+
+.contact-left {
+  padding: 0;
+  margin: 0;
+}
+
+.contact-left button {
+    display: flex;
+    align-items: center;
+    padding: 0px 0px;
+    font-size: 16px;
+    color: black;
+    gap: 10px;
+    border: none;
+    border-radius: 50px;
+    background: #fda5cd;
+    cursor: pointer;
+
+}
+
+.contact-left-button img {
+    height: 15px;
+}
+
+.contact-right img {
+    width: 200px;
+}
+
+
+#contact-nav {
+    display: block;    
+    justify-content: center;
+    align-items: center;
+    height: 30px;   
+  border-radius: 30px;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    gap: 0;
+    padding: 0;
+}   
+
+.introo-div {
+  display: flex;         /* Activates the side-by-side layout */
+  align-items: center;   /* Centers the image and text vertically */
+  gap: 2px;             /* Adds space between the image and the text */
+}
+
+.profile {
+  max-width: 280px;      /* Restricts the iPod to a reasonable width */
+  height: auto;          /* Maintains the image aspect ratio */
+}
+
+.profile-text {
+  font-size: 25px;
+}
+
