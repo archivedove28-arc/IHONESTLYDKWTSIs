@@ -1,36 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
-   <meta name="description" content="My Personal Website full of things about me and things I adore and cherish">
-   <meta name="keywords" content="Personal, Art, crafty, OG">
-   <meta name="author" content="Dove">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Dove's Arch!ve</title>
+   <title>Guest Book</title>
    <link rel="stylesheet" href="styles.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
 </head>
+
 <body>
-      <div class="intro">
-         <h1 class="logo-header">
-            <span class="logo">Dove's - </span><span class="logo">- Archive.</span>
-         </h1>
-      </div>
-      <header>
-         <div class="con">
-               <div class="con-tooltip top">
-                  <a href="home.html">
-                     <img src="assets/icons/Hello Kitty Pink GIF.gif" alt="Dancing-hello-kitty">
-                  </a>
-               <div class="tooltip ">
-                     <p>click to enter</p>
-               </div>
-            </div>
-            <div class="loading">
-               <div></div>
-               <div></div>
-               <div></div>
-            </div>
+
+   <div id="view-guestbook" class="container view active">
+      <header class="header">
+         <div class="logo-box">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="icon">
+               <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+         </div>
+         <h1>Guest Book</h1>
+         <p class="subtitle">Welcome to my little corner of the internet. Leave a note, share a thought, or just say
+            hello!</p>
+         <div class="counter" id="entry-counter">0 ENTRIES SO FAR</div>
       </header>
-      <script src="app.js"></script>
+
+      <main class="card form-card">
+         <form id="guestbook-form">
+            <div class="input-group">
+               <label for="guest-name">Your Name</label>
+               <input type="text" id="guest-name" placeholder="How should I call you?" required>
+            </div>
+
+            <div class="input-group">
+               <label for="guest-email">Your Email <span class="optional-tag">(Optional - Only seen by
+                     admin)</span></label>
+               <input type="email" id="guest-email" placeholder="email@example.com">
+            </div>
+
+            <div class="input-group">
+               <label for="guest-website">Your Website <span class="optional-tag">(Optional)</span></label>
+               <input type="url" id="guest-website" placeholder="https://yourwebsite.com">
+            </div>
+
+            <div class="input-group">
+               <label for="guest-message">Your Message</label>
+               <textarea id="guest-message" rows="4" placeholder="Write something nice..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-submit">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" class="btn-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+               </svg>
+               Sign Guest Book
+            </button>
+         </form>
+      </main>
+
+      <section class="notes-section">
+         <h2 class="section-title">Recent Notes</h2>
+         <div id="notes-list"></div>
+      </section>
+
+      <footer class="footer">
+         <button class="link-btn" onclick="switchView('view-login')">Manage</button>
+      </footer>
+   </div>
+
+   <div id="view-login" class="container view">
+      <header class="header">
+         <div class="logo-box">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="icon">
+               <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+         </div>
+         <h1 class="small-title">Moderation</h1>
+         <p class="subtitle">Enter your admin password to manage entries</p>
+      </header>
+
+      <main class="card login-card">
+         <form id="login-form">
+            <div class="input-group">
+               <input type="password" id="admin-password" placeholder="Admin password" required>
+            </div>
+            <button type="submit" class="btn btn-submit">Sign In</button>
+         </form>
+         <button class="link-btn back-btn" onclick="switchView('view-guestbook')">Back to Guest Book</button>
+      </main>
+   </div>
+
+   <div id="view-admin" class="container view admin-container">
+      <header class="admin-header">
+         <div>
+            <h1 class="admin-title">Moderation Panel</h1>
+            <div class="admin-counter" id="admin-counter">0 entries</div>
+         </div>
+         <button class="link-btn" onclick="switchView('view-guestbook')">Back to Guest Book</button>
+      </header>
+
+      <main id="admin-notes-list" class="admin-list"></main>
+   </div>
+
+   <div id="toast-container" class="toast-container"></div>
+
+   <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,255 +1,372 @@
-@font-face {
-  font-family: 'noot';
-  src: url('assets/fonts/noot-regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* Styling System Base */
 * {
-   font-family: "noot", sans-serif;
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body { 
-  background-color: rgb(255, 184, 202); 
-  margin: 0; 
-  height: 100vh; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  text-align: center; 
-} 
-
-header h4 { 
-  font-size: 1.6rem;
-  margin: 0; 
-  color: #FAF7F2 ;
+:root {
+  --bg-color: #FDF4F5;
+  --card-bg: #FFFFFF;
+  --text-main: #5C3E43;
+  --text-muted: #8E7175;
+  --accent: #C94A65;
+  --accent-hover: #B03D55;
+  --border-light: #F7DADE;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-cursive: 'Caveat', cursive;
 }
 
-
-
-a {   
-   text-decoration: none;
-   color: #161616;
-}
-
-a:hover {
-   transform: translate(-50%, -50%);
-      transition: scale(0.5s) ease-in-out;
-   text-decoration:wavy;
-}
-
-
-/*splash screen*/
-
-.intro {
-   position: fixed;
-   z-index: 1;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100vh;
-   background-color: #161616;
-   transition: 1s;
-}
-
-.logo-header {
-   position: absolute;
-   top: 40%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   color: #ffffff;
-}
-
-.logo {
-   position: relative;
-   display: inline-block;
-   bottom: -20px;
-   opacity: 0;
-}
-
-.logo.active {
-   bottom: 0;
-   opacity: 1;
-   transition: ease-in-out 0.5s;
-}
-
-.logo.fade {
-   bottom: 150px;
-   opacity: 0;
-   transition: ease-in-out 0.5s;
-}
-
-
-/*tooltip Box*/
-.con-tooltip {
-
-  position: relative;
-  background: rgb(255, 184, 202);
-  
-  border-radius: 9px;
-  padding: 0 20px;
-  margin: 10px;
-  
-  display: inline-block;
-  
-  transition: all 0.3s ease-in-out;
-  cursor: default;
-
-}
-
-/*tooltip */
-.tooltip {
-  visibility: hidden;
-  z-index: 1;
-  opacity: .40;
-  
-  width: 100%;
-  padding: 0px 20px;
-
-  background: #FAF7F2;
-  color: #000000;
-  
-  position: absolute;
-  top:-5%;
-  left: 5%;
-  
-
-  border-radius: 9px;
-  font: 16px;
-
-  transform: translateY(6px);
-  transition: all 0.3s ease-in-out;
-  
-  box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
-}
-
-
-/* tooltip  after*/
-.tooltip::after {
-  content: "";
-  width: 0;
-  height: 0;
-  
-  border-style: solid;
-  border-width: 12px 12.5px 0 12.5px;
-  border-color: #333 transparent transparent transparent;
-
-  position: absolute;
-  left: 40%;
-
-}
-
-.con-tooltip:hover .tooltip{
-  visibility: visible;
-  transform: translateY(-10px);
-  opacity: 1;
-    transition: .3s linear;
-  animation: odsoky 1s ease-in-out infinite  alternate;
-
-}
-@keyframes odsoky {
-  0%{
-    transform: translateY(6px);	
-  }
-
-  100%{
-    transform: translateY(1px);	
-  }
-
-}
-
-/*hover ToolTip*/
-.left:hover {transform: translateX(-6px); }
-.top:hover {transform: translateY(-6px);  }
-.bottom:hover {transform: translateY(6px);}
-.right:hover {transform: translateX(6px); }
-
-/* ==========================================
-   DO NOT TOUCH YOUR ORIGINAL CSS ABOVE THIS LINE 
-   ========================================== */
-
-/* 1. THE HELLO KITTY LINK (Fades in last) */
-header .con-tooltip {
-  opacity: 0; /* Starts completely hidden */
-  
-  /* Waits 3.5 seconds total (2s for splash + 1.5s for loading) then fades in */
-  animation: revealKitty 0.5s ease-in-out forwards;
-  animation-delay: 3.5s; 
-}
-
-/* 2. THE LOADING BUBBLES CONTAINER (Centered and Big) */
-.loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Perfectly centers it on the viewport */
-  
+body {
+  background-color: var(--bg-color);
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 1.5rem;
+}
+
+.view {
+  display: none;
+  width: 100%;
+  max-width: 580px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.view.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-box {
+  width: 46px;
+  height: 46px;
+  background-color: #F9E2E5;
+  border-radius: 12px;
+  display: flex;
   align-items: center;
-  gap: 15px; /* Wider gap for bigger bubbles */
-  
-  /* Starts hidden, fades in at 2s, stays for 1.5s, then disappears */
-  opacity: 0;
-  animation: handleLoadingBars 1.5s linear forwards;
-  animation-delay: 2s; 
+  justify-content: center;
+  margin: 0 auto 1.25rem;
 }
 
-/* 3. MAKING THE 3 BUBBLES BIGGER & BOUNCE */
-.loading div {
-  width: 24px;  /* Increased size to make them big */
-  height: 24px; /* Increased size to make them big */
-  background-color: #FAF7F2; /* Cream color to match your tooltip palette */
-  border-radius: 50%;
-  
-  /* Infinite bouncing effect */
-  animation: bubbleBounce 0.6s ease-in-out infinite alternate;
+.logo-box .icon {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent);
 }
 
-/* Staggering the bubbles so they wave */
-.loading div:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.loading div:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-
-/* ==========================================
-   ANIMATION KEYFRAMES (TIMING RIG)
-   ========================================== */
-
-/* Controls the loading bubbles' appearance window */
-@keyframes handleLoadingBars {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1; /* Quick fade in */
-  }
-  90% {
-    opacity: 1; /* Stays visible doing its thing */
-  }
-  100% {
-    opacity: 0; /* Smoothly fades out to make room for Kitty */
-    visibility: hidden;
-  }
+h1 {
+  font-family: var(--font-cursive);
+  font-size: 3.5rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
-/* Individual bubble bouncing physics */
-@keyframes bubbleBounce {
-  to {
-    transform: translateY(-20px); /* Bounces higher since bubbles are bigger */
-  }
+.header .small-title {
+  font-size: 2.5rem;
 }
 
-/* Final reveal for Hello Kitty */
-@keyframes revealKitty {
-  to {
-    opacity: 1;
-  }
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 440px;
+  margin: 0 auto 1.25rem;
+}
+
+.counter {
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(201, 74, 101, 0.03);
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(247, 218, 222, 0.5);
+}
+
+.input-group {
+  margin-bottom: 1.25rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.optional-tag {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background-color: #FFFbfc;
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  font-size: 0.925rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: var(--accent);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: #C0A6AA;
+}
+
+.btn {
+  width: 100%;
+  background-color: var(--accent);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link-btn:hover {
+  color: var(--accent);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.section-title {
+  font-family: var(--font-cursive);
+  font-size: 2.25rem;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.note-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: left;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(247, 218, 222, 0.4);
+  box-shadow: 0 4px 12px rgba(201, 74, 101, 0.01);
+}
+
+.note-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.note-author-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.note-author {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.note-website {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.note-website:hover {
+  text-decoration: underline;
+}
+
+.note-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.note-body {
+  font-size: 0.925rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  white-space: pre-wrap;
+}
+
+.empty-state {
+  border: 2px dashed #EACAD0;
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.empty-state span {
+  display: block;
+  font-size: 0.825rem;
+  margin-top: 0.25rem;
+  opacity: 0.8;
+}
+
+.admin-container {
+  max-width: 640px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.admin-title {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.admin-counter {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.admin-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: #FFFFFF;
+  padding: 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-light);
+}
+
+.admin-row-content {
+  flex-grow: 1;
+}
+
+.admin-email-badge {
+  display: inline-block;
+  background: #FFF0F2;
+  color: var(--accent);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #C0A6AA;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.btn-delete:hover {
+  color: #E05370;
+  background-color: #FFF0F2;
+}
+
+.trash-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.back-btn {
+  display: block;
+  margin: 1.25rem auto 0;
+}
+
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background: #332224;
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
